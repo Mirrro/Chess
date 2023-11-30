@@ -43,8 +43,8 @@ public class PieceView : MonoBehaviour, IPieceView
             .01f).AsyncWaitForCompletion();
     }
 
-    public void SetColor(bool isWhite)
+    public void SetColor(Color color)
     {
-        renderer.material.color = isWhite ? Color.white : Color.black;
+        renderer.material.color = color;
     }
 }

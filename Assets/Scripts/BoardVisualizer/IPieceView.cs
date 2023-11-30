@@ -9,5 +9,5 @@ public interface IPieceView
     public UniTask Show();
     public UniTask Hide();
 
-    public void SetColor(bool isWhite);
+    public void SetColor(Color color);
 }

@@ -15,6 +15,8 @@ public class BoardView : MonoBehaviour
     [SerializeField] private GameObject bishopPrefab;
     [SerializeField] private GameObject queenPrefab;
     [SerializeField] private GameObject kingPrefab;
+    [SerializeField] private Color black;
+    [SerializeField] private Color white;
 
     public event Action<int, int> TileSelected;
 
@@ -53,7 +55,7 @@ public class BoardView : MonoBehaviour
             {
                 BoardTileView view = Instantiate(boardFieldPrefab, new Vector3(x, 0, y), Quaternion.identity)
                     .GetComponent<BoardTileView>();
-                view.SetColor((x + y) % 2 == 0 ? Color.black : Color.grey);
+                view.SetColor((x + y) % 2 == 0 ? black : white);
                 var x1 = x;
                 var y1 = y;
                 view.Clicked += () => TileSelected?.Invoke(x1, y1);
@@ -191,7 +193,7 @@ public class BoardView : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException();
         }
-        view.SetColor(visualization.Piece.IsWhite);
+        view.SetColor(visualization.Piece.IsWhite ? white : black);
         return view;
     }
 
