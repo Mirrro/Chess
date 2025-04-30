@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29e029551c234693952c4962ec039e87, type: 3}
+  m_Name: GameViewContainer
+  m_EditorClassIdentifier: 
+  pawnViewPrefab: {fileID: 3444893456553827496, guid: 7bf531963e3ae954c8f25da855d18658, type: 3}
+  rookViewPrefab: {fileID: 4251549326549915366, guid: a217ec8afb6d86440a4cf1eaae5327df, type: 3}
+  knightViewPrefab: {fileID: 9093667135093319604, guid: 40dc738e73148e149953be5f4187a34c, type: 3}
+  bishopViewPrefab: {fileID: 7635429899663227684, guid: c631a26549f10234faa9af2be4cd185f, type: 3}
+  queenViewPrefab: {fileID: 5557681138352787691, guid: 8541a8400ffdbe54e83a6549cf4366cb, type: 3}
+  kingViewPrefab: {fileID: 693583781930888874, guid: cc9a17c30b429854bab4dc75c16a1537, type: 3}
+  tileViewPrefab: {fileID: 8904241797829666783, guid: 9e7f38bb80d30f743add9cd4380d3b6e, type: 3}
