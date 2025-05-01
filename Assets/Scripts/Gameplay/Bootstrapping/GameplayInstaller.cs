@@ -26,11 +26,13 @@ namespace Gameplay.Bootstrapping
         private GameViewContainer gameViewContainer;
 
         [SerializeField] private BoardView boardView;
+        [SerializeField] private PromotionMenu promotionMenu;
 
         public override void InstallBindings()
         {
             Container.BindInstance(gameViewContainer);
             Container.BindInstance(boardView);
+            Container.BindInstance(promotionMenu);
 
             Container.BindInterfacesAndSelfTo<GameplayContext>().AsSingle();
             Container.BindInterfacesAndSelfTo<GamePresentation>().AsSingle();
@@ -39,7 +41,7 @@ namespace Gameplay.Bootstrapping
             Container.BindInterfacesAndSelfTo<AITurnState>().AsSingle();
             Container.BindInterfacesAndSelfTo<ChessAi>().AsSingle();
 
-            Container.BindInterfacesAndSelfTo<PlayerSelectionController>().AsSingle();
+            Container.BindInterfacesAndSelfTo<MoveSelectionService>().AsSingle();
 
             Container.BindInterfacesAndSelfTo<DebugStepReactionSystem>().AsSingle();
             Container.BindInterfacesAndSelfTo<GamePresentationStepReactionSystem>().AsSingle();

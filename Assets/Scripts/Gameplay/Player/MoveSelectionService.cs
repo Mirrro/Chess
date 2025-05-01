@@ -14,7 +14,7 @@ namespace Gameplay.Player
     /// <summary>
     /// Handles player interaction with the game board, including selecting pieces, previewing, and executing moves.
     /// </summary>
-    public class PlayerSelectionController
+    public class MoveSelectionService
     {
         private readonly GamePresentation gamePresentation;
         private readonly GameplayContext gameplayContext;
@@ -25,7 +25,7 @@ namespace Gameplay.Player
         private PieceGameplayModel selectedPieceGameplay;
         private Action onComplete;
 
-        public PlayerSelectionController(
+        public MoveSelectionService(
             GamePresentation gamePresentation,
             GameplayContext gameplayContext,
             ExecutionService executionService)
@@ -55,7 +55,7 @@ namespace Gameplay.Player
                 if (selectedPieceGameplay != null)
                 {
                     possibleGameplayMoves = GameplayMovesGenerator.GetMovesForPiece(gameplayContext.GameplayStateModel,
-                        selectedPieceGameplay.Id);
+                        selectedPieceGameplay.Id, false);
 
                     gamePresentation.UnhighlightAllTiles();
                     gamePresentation.HighlightTile(tilePosition, Color.yellow);
@@ -123,6 +123,20 @@ namespace Gameplay.Player
             possibleGameplayMoves.Clear();
             gamePresentation.UnhighlightAllTiles();
             executionService.UndoPreview(null);
+        }
+    }
+
+    public class PromotionSelectionService
+    {
+        private readonly GamePresentation gamePresentation;
+        public PromotionSelectionService(GamePresentation gamePresentation)
+        {
+            this.gamePresentation = gamePresentation;
+        }
+
+        public void SelectPromotion(Action<PieceType> onComplete)
+        {
+            gamePresentation.SelectPromotion(onComplete);
         }
     }
 }

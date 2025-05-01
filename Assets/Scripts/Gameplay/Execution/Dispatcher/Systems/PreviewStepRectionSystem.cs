@@ -11,7 +11,7 @@ namespace Gameplay.Execution.Dispatcher.Systems
         public PreviewStepRectionSystem(GamePresentation gamePresentation)
         {
             RegisterGameplayStep<MovePieceStep>(
-                (step, onComplete) =>
+                (step, ctx, onComplete) =>
                 {
                     if (gamePresentation.TryGetPiecePresenter(step.PieceToMoveId, out var piecePresenter))
                     {
@@ -20,7 +20,7 @@ namespace Gameplay.Execution.Dispatcher.Systems
 
                     onComplete.Invoke();
                 },
-                (step, onComplete) =>
+                (step, ctx, onComplete) =>
                 {
                     if (gamePresentation.TryGetPiecePresenter(step.PieceToMoveId, out var piecePresenter))
                     {
@@ -31,7 +31,7 @@ namespace Gameplay.Execution.Dispatcher.Systems
                 });
 
             RegisterGameplayStep<CapturePieceStep>(
-                (step, onComplete) =>
+                (step, ctx, onComplete) =>
                 {
                     if (gamePresentation.TryGetPiecePresenter(step.PieceToCaptureId, out var piecePresenter))
                     {
@@ -40,7 +40,7 @@ namespace Gameplay.Execution.Dispatcher.Systems
 
                     onComplete.Invoke();
                 },
-                (step, onComplete) =>
+                (step, ctx, onComplete) =>
                 {
                     if (gamePresentation.TryGetPiecePresenter(step.PieceToCaptureId, out var piecePresenter))
                     {
@@ -51,7 +51,7 @@ namespace Gameplay.Execution.Dispatcher.Systems
                 });
 
             RegisterGameplayStep<PromotePieceStep>(
-                (step, onComplete) =>
+                (step, ctx, onComplete) =>
                 {
                     if (gamePresentation.TryGetPiecePresenter(step.PieceToPromoteId, out var piecePresenter))
                     {
@@ -60,7 +60,7 @@ namespace Gameplay.Execution.Dispatcher.Systems
 
                     onComplete.Invoke();
                 },
-                (step, onComplete) =>
+                (step, ctx, onComplete) =>
                 {
                     if (gamePresentation.TryGetPiecePresenter(step.PieceToPromoteId, out var piecePresenter))
                     {

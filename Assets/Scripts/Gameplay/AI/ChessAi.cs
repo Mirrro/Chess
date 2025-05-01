@@ -26,7 +26,7 @@ namespace Gameplay.AI
             var bestScore = int.MinValue;
             var bestMoves = new List<IGameplayMove>();
 
-            var possibleMoves = GameplayMovesGenerator.GetMoves(state, isWhite);
+            var possibleMoves = GameplayMovesGenerator.GetMoves(state, isWhite, true);
 
             foreach (var move in possibleMoves)
             {
@@ -60,7 +60,7 @@ namespace Gameplay.AI
                 return isWhiteRoot ? eval.ScoreWhite - eval.ScoreBlack : eval.ScoreBlack - eval.ScoreWhite;
             }
 
-            var possibleMoves = GameplayMovesGenerator.GetMoves(state, isMaximizing);
+            var possibleMoves = GameplayMovesGenerator.GetMoves(state, isMaximizing, true);
 
             var bestValue = isMaximizing == isWhiteRoot ? int.MinValue : int.MaxValue;
 

@@ -88,5 +88,10 @@ namespace Gameplay.Presentation.Pieces
         }
 
         public class Factory : PlaceholderFactory<IPieceView, IPieceVisualModel, PiecePresenter> { }
+
+        public void Dispose()
+        {
+            view.Dispose();
+        }
     }
 }

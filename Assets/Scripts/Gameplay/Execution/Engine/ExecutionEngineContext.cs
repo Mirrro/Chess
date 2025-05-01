@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Gameplay.Execution.Dispatcher;
+using Gameplay.Execution.Dispatcher.Systems;
 using Gameplay.Execution.Models;
 using Gameplay.Execution.Moves;
 using Gameplay.Execution.Moves.Steps;
@@ -13,8 +14,8 @@ namespace Gameplay.Execution.Engine
     /// </summary>
     public class ExecutionEngineContext
     {
+        public GameplayStateModel GameplayStateModel => gameplayStateModel;
         private readonly GameplayStateModel gameplayStateModel;
-        private readonly IGameplayMove gameplayMove;
         private readonly StepObserverDispatcher dispatcher;
         private readonly Queue<IGameplayStep> stepQueue = new();
         private readonly Queue<IGameplayStep> executedSteps = new();
@@ -23,7 +24,6 @@ namespace Gameplay.Execution.Engine
             StepObserverDispatcher dispatcher)
         {
             this.gameplayStateModel = gameplayStateModel;
-            this.gameplayMove = gameplayMove;
             this.dispatcher = dispatcher;
 
             foreach (var step in gameplayMove.GetSteps())
@@ -42,6 +42,11 @@ namespace Gameplay.Execution.Engine
             UndoNextStepInternal(onComplete);
         }
 
+        public void AddStep(IGameplayStep step)
+        {
+            stepQueue.Enqueue(step);
+        }
+
         private void DispatchNextStepInternal(Action onComplete)
         {
             if (stepQueue.Count == 0)
@@ -53,7 +58,7 @@ namespace Gameplay.Execution.Engine
             var step = stepQueue.Dequeue();
             step.ApplyTo(gameplayStateModel);
 
-            dispatcher.OnStepAllied(step, () =>
+            dispatcher.OnStepAllied(step, this, () =>
             {
                 executedSteps.Enqueue(step);
                 DispatchNextStepInternal(onComplete);
@@ -71,7 +76,7 @@ namespace Gameplay.Execution.Engine
             var step = executedSteps.Dequeue();
             step.Undo(gameplayStateModel);
 
-            dispatcher.OnStepUndo(step, () => { UndoNextStepInternal(onComplete); });
+            dispatcher.OnStepUndo(step, this, () => { UndoNextStepInternal(onComplete); });
         }
 
         public class Factory : PlaceholderFactory<GameplayStateModel, IGameplayMove, StepObserverDispatcher,

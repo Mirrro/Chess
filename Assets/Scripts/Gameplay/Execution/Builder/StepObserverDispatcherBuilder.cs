@@ -34,12 +34,12 @@ namespace Gameplay.Execution.Builder
         public StepObserverDispatcher BuildPreview()
         {
             return factory.Create(
-                new IGameplayStepReactionSystem[] {debugStepReactionSystem, previewStepReactionSystem});
+                new IGameplayStepReactionSystem[] {previewStepReactionSystem});
         }
 
         public StepObserverDispatcher BuildAI()
         {
-            return factory.Create(new IGameplayStepReactionSystem[] {debugStepReactionSystem});
+            return factory.Create(new IGameplayStepReactionSystem[] {});
         }
     }
 }

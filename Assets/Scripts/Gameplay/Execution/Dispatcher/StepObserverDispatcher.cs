@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Gameplay.Execution.Dispatcher.Systems;
+using Gameplay.Execution.Engine;
 using Gameplay.Execution.Moves.Steps;
 using Zenject;
 
@@ -11,7 +12,6 @@ namespace Gameplay.Execution.Dispatcher
     /// </summary>
     public class StepObserverDispatcher
     {
-        public event Action Completed;
         private readonly Dictionary<Type, List<IGameplayStepReactionSystem>> stepTypeMap = new();
 
         public StepObserverDispatcher(IEnumerable<IGameplayStepReactionSystem> observers)
@@ -30,7 +30,7 @@ namespace Gameplay.Execution.Dispatcher
             }
         }
 
-        public void OnStepAllied(IGameplayStep step, Action onComplete)
+        public void OnStepAllied(IGameplayStep step, ExecutionEngineContext ctx, Action onComplete)
         {
             if (!stepTypeMap.TryGetValue(step.GetType(), out var observers) || observers.Count == 0)
             {
@@ -41,7 +41,7 @@ namespace Gameplay.Execution.Dispatcher
             var remaining = observers.Count;
             foreach (var observer in observers)
             {
-                observer.OnGameplayStepApplied(step, () =>
+                observer.OnGameplayStepApplied(step, ctx, () =>
                 {
                     if (--remaining == 0)
                     {
@@ -51,7 +51,7 @@ namespace Gameplay.Execution.Dispatcher
             }
         }
 
-        public void OnStepUndo(IGameplayStep step, Action onComplete)
+        public void OnStepUndo(IGameplayStep step, ExecutionEngineContext ctx, Action onComplete)
         {
             if (!stepTypeMap.TryGetValue(step.GetType(), out var observers) || observers.Count == 0)
             {
@@ -62,7 +62,7 @@ namespace Gameplay.Execution.Dispatcher
             var remaining = observers.Count;
             foreach (var observer in observers)
             {
-                observer.OnGameplayStepUndo(step, () =>
+                observer.OnGameplayStepUndo(step, ctx, () =>
                 {
                     if (--remaining == 0)
                     {

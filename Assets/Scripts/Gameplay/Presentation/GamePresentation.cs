@@ -19,16 +19,18 @@ namespace Gameplay.Presentation
 
         private readonly GameViewContainer gameViewContainer;
         private readonly BoardView boardView;
+        private readonly PromotionMenu promotionMenu;
         private readonly PiecePresenter.Factory piecePresenterFactory;
 
         private readonly Dictionary<int, IPiecePresenter> piecesPresenterTable = new();
 
         public GamePresentation(BoardView boardView, GameViewContainer gameViewContainer,
-            PiecePresenter.Factory piecePresenterFactory)
+            PiecePresenter.Factory piecePresenterFactory, PromotionMenu promotionMenu)
         {
             this.boardView = boardView;
             this.gameViewContainer = gameViewContainer;
             this.piecePresenterFactory = piecePresenterFactory;
+            this.promotionMenu = promotionMenu;
         }
 
         public void Initialize(GameplayStateModel gameplayStateModel)
@@ -40,9 +42,31 @@ namespace Gameplay.Presentation
 
             foreach (var pieceModel in gameplayStateModel.PieceMap.Values)
             {
-                var pieceView = CreatePieceView(pieceModel);
-                pieceView.SetColor(pieceModel.IsColor ? Color.grey : Color.black);
-                piecesPresenterTable.Add(pieceModel.Id, pieceView);
+                piecesPresenterTable.Add(pieceModel.Id, CreatePieceView(pieceModel));
+            }
+            
+            promotionMenu.gameObject.SetActive(false);
+        }
+
+        public void SelectPromotion(Action<PieceType> onCompelte)
+        {
+            promotionMenu.gameObject.SetActive(true);
+            promotionMenu.PromotionClicked += OnPromotionSelected;
+            
+            void OnPromotionSelected(PieceType obj)
+            {
+                onCompelte?.Invoke(obj);
+                promotionMenu.gameObject.SetActive(false);
+            }
+        }
+
+        public void UpdatePresentation(PieceGameplayModel pieceGameplayModel)
+        {
+            if (TryGetPiecePresenter(pieceGameplayModel.Id, out IPiecePresenter piecePresenter))
+            {
+                piecePresenter.Dispose();
+                piecesPresenterTable.Remove(pieceGameplayModel.Id);
+                piecesPresenterTable.Add(pieceGameplayModel.Id, CreatePieceView(pieceGameplayModel));
             }
         }
 

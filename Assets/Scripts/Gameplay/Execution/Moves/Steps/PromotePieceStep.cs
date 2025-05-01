@@ -7,6 +7,9 @@ namespace Gameplay.Execution.Moves.Steps
     /// </summary>
     public class PromotePieceStep : IGameplayStep
     {
+        public int PieceToPromoteId;
+        public PieceType PromotionType;
+        
         private PieceType previousType;
 
         public PromotePieceStep(int pieceToPromoteId, PieceType promotionType)
@@ -34,8 +37,24 @@ namespace Gameplay.Execution.Moves.Steps
 
             promotionModel.PieceType = previousType;
         }
-
+    }
+    
+    public class PlayerPromotionStep : IGameplayStep
+    {
         public int PieceToPromoteId;
-        public PieceType PromotionType;
+        public PlayerPromotionStep(int pieceToPromoteId)
+        {
+            PieceToPromoteId = pieceToPromoteId;
+        }
+
+        public void ApplyTo(GameplayStateModel gameplayStateModel)
+        {
+            
+        }
+
+        public void Undo(GameplayStateModel gameplayStateModel)
+        {
+            
+        }
     }
 }

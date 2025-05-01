@@ -12,17 +12,17 @@ namespace Gameplay.States
     {
         public event Action StateCompleted;
 
-        private readonly PlayerSelectionController playerSelectionController;
+        private readonly MoveSelectionService moveSelectionService;
 
-        public PlayerTurnState(PlayerSelectionController playerSelectionController, GameplayContext gameplayContext)
+        public PlayerTurnState(MoveSelectionService moveSelectionService, GameplayContext gameplayContext)
         {
-            this.playerSelectionController = playerSelectionController;
+            this.moveSelectionService = moveSelectionService;
         }
 
         public void Activate()
         {
             Debug.Log("PlayerTurnState: Activate");
-            playerSelectionController.PlayerExecuteMove(OnMoveComplete);
+            moveSelectionService.PlayerExecuteMove(OnMoveComplete);
         }
 
         public void Deactivate()

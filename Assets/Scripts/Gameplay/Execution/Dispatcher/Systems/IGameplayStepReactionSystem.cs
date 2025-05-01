@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using Gameplay.Execution.Engine;
+using Gameplay.Execution.Models;
 using Gameplay.Execution.Moves.Steps;
 
 namespace Gameplay.Execution.Dispatcher.Systems
@@ -9,8 +11,8 @@ namespace Gameplay.Execution.Dispatcher.Systems
     /// </summary>
     public interface IGameplayStepReactionSystem
     {
-        void OnGameplayStepApplied(IGameplayStep gameplayStep, Action onComplete);
-        void OnGameplayStepUndo(IGameplayStep gameplayStep, Action onComplete);
+        void OnGameplayStepApplied(IGameplayStep gameplayStep, ExecutionEngineContext ctx, Action onComplete);
+        void OnGameplayStepUndo(IGameplayStep gameplayStep, ExecutionEngineContext ctx, Action onComplete);
         IEnumerable<Type> GetObservedStepTypes();
     }
 }

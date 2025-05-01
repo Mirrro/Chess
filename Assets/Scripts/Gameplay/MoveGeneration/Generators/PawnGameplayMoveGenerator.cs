@@ -156,7 +156,7 @@ namespace Gameplay.MoveGeneration.Generators
             {
                 var steps = new List<IGameplayStep>(baseSteps)
                 {
-                    new PromotePieceStep(pawnId, PieceType.Queen)
+                    new PlayerPromotionStep(pawnId)
                 };
 
                 moves.Add(new GameplayMove(targetPosition, steps));

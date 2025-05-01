@@ -63,5 +63,10 @@ namespace Gameplay.Presentation.Pieces
             transform.position = position;
             transform.rotation = rotation;
         }
+
+        public void Dispose()
+        {
+            Destroy(pieceCapture.gameObject);
+        }
     }
 }

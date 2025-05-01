@@ -12,7 +12,7 @@ namespace Gameplay.MoveGeneration
     /// </summary>
     public static class GameplayMovesGenerator
     {
-        public static List<IGameplayMove> GetMovesForPiece(GameplayStateModel gameplayStateModel, int pieceId)
+        public static List<IGameplayMove> GetMovesForPiece(GameplayStateModel gameplayStateModel, int pieceId, bool isAi)
         {
             var possibleGameplayMoves = new List<IGameplayMove>();
 
@@ -23,7 +23,7 @@ namespace Gameplay.MoveGeneration
 
             possibleGameplayMoves = pieceModel.PieceType switch
             {
-                PieceType.Pawn => PawnGameplayMoveGenerator.GeneratePawnMoves(gameplayStateModel, pieceModel.Id, false),
+                PieceType.Pawn => PawnGameplayMoveGenerator.GeneratePawnMoves(gameplayStateModel, pieceModel.Id, isAi),
                 PieceType.Rook => RookGameplayMoveGenerator.GenerateMoves(gameplayStateModel, pieceModel.Id),
                 PieceType.Knight => KnightGameplayMoveGenerator.GenerateMoves(gameplayStateModel, pieceModel.Id),
                 PieceType.Bishop => BishopGameplayMovesGenerator.GenerateMoves(gameplayStateModel, pieceModel.Id),
@@ -34,12 +34,12 @@ namespace Gameplay.MoveGeneration
             return possibleGameplayMoves;
         }
 
-        public static List<IGameplayMove> GetMoves(GameplayStateModel gameplayStateModel, bool isColor)
+        public static List<IGameplayMove> GetMoves(GameplayStateModel gameplayStateModel, bool isColor, bool isAi)
         {
             var moves = new List<IGameplayMove>();
             foreach (var pieceModel in gameplayStateModel.PieceMap.Values.Where(piece => piece.IsColor == isColor))
             {
-                moves.AddRange(GetMovesForPiece(gameplayStateModel, pieceModel.Id));
+                moves.AddRange(GetMovesForPiece(gameplayStateModel, pieceModel.Id, isAi));
             }
 
             return moves;

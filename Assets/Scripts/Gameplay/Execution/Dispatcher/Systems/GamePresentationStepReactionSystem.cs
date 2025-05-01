@@ -1,3 +1,4 @@
+using Gameplay.Execution.Models;
 using Gameplay.Execution.Moves.Steps;
 using Gameplay.Presentation;
 using Gameplay.Utility;
@@ -12,7 +13,7 @@ namespace Gameplay.Execution.Dispatcher.Systems
         public GamePresentationStepReactionSystem(GamePresentation gamePresentation)
         {
             RegisterGameplayStep<MovePieceStep>(
-                (step, onComplete) =>
+                (step, ctx, onComplete) =>
                 {
                     if (gamePresentation.TryGetPiecePresenter(step.PieceToMoveId, out var piecePresenter))
                     {
@@ -23,7 +24,7 @@ namespace Gameplay.Execution.Dispatcher.Systems
                         onComplete.Invoke();
                     }
                 },
-                (step, onComplete) =>
+                (step, ctx, onComplete) =>
                 {
                     if (gamePresentation.TryGetPiecePresenter(step.PieceToMoveId, out var piecePresenter))
                     {
@@ -36,7 +37,7 @@ namespace Gameplay.Execution.Dispatcher.Systems
                 });
 
             RegisterGameplayStep<CapturePieceStep>(
-                (step, onComplete) =>
+                (step, ctx, onComplete) =>
                 {
                     if (gamePresentation.TryGetPiecePresenter(step.PieceToCaptureId, out var piecePresenter))
                     {
@@ -48,7 +49,7 @@ namespace Gameplay.Execution.Dispatcher.Systems
                         onComplete.Invoke();
                     }
                 },
-                (step, onComplete) =>
+                (step, ctx, onComplete) =>
                 {
                     if (gamePresentation.TryGetPiecePresenter(step.PieceToCaptureId, out var piecePresenter))
                     {
@@ -62,29 +63,58 @@ namespace Gameplay.Execution.Dispatcher.Systems
                 });
 
             RegisterGameplayStep<PromotePieceStep>(
-                (step, onComplete) =>
+                (step, ctx, onComplete) =>
                 {
                     if (gamePresentation.TryGetPiecePresenter(step.PieceToPromoteId, out var piecePresenter))
                     {
-                        piecePresenter.Promote();
-                        onComplete.Invoke();
+                        if (ctx.GameplayStateModel.TryGetPieceModelById(step.PieceToPromoteId, out var pieceModel))
+                        {
+                            piecePresenter.Promote();
+                            gamePresentation.UpdatePresentation(pieceModel);
+                            onComplete.Invoke();
+                        }
                     }
                     else
                     {
                         onComplete.Invoke();
                     }
                 },
-                (step, onComplete) =>
+                (step, ctx, onComplete) =>
                 {
                     if (gamePresentation.TryGetPiecePresenter(step.PieceToPromoteId, out var piecePresenter))
                     {
-                        piecePresenter.UnPromote();
-                        onComplete.Invoke();
+                        if (ctx.GameplayStateModel.TryGetPieceModelById(step.PieceToPromoteId, out var pieceModel))
+                        {
+                            piecePresenter.UnPromote();
+                            gamePresentation.UpdatePresentation(pieceModel);
+                            onComplete.Invoke();
+                        }
+                        else
+                        {
+                            onComplete.Invoke();
+                        }
                     }
                     else
                     {
                         onComplete.Invoke();
                     }
+                });
+            
+            RegisterGameplayStep<PlayerPromotionStep>(
+                (step, ctx, onComplete) =>
+                {
+                    // Player select promotion and inject promotion step.
+                    void OnPromotionSelected(PieceType promotionType)
+                    {
+                        ctx.AddStep(new PromotePieceStep(step.PieceToPromoteId, promotionType));
+                        onComplete.Invoke();
+                    }
+                    
+                    gamePresentation.SelectPromotion(OnPromotionSelected);
+                },
+                (step, ctx, onComplete) =>
+                {
+                    onComplete.Invoke();
                 });
         }
     }

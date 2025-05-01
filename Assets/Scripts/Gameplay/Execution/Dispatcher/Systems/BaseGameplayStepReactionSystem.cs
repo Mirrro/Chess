@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Gameplay.Execution.Engine;
 using Gameplay.Execution.Moves.Steps;
 
 namespace Gameplay.Execution.Dispatcher.Systems
@@ -9,14 +10,14 @@ namespace Gameplay.Execution.Dispatcher.Systems
     /// </summary>
     public abstract class BaseGameplayStepReactionSystem : IGameplayStepReactionSystem
     {
-        private readonly Dictionary<Type, (Action<IGameplayStep, Action> onApply, Action<IGameplayStep, Action> onUndo)>
+        private readonly Dictionary<Type, (Action<IGameplayStep, ExecutionEngineContext, Action> onApply, Action<IGameplayStep, ExecutionEngineContext, Action> onUndo)>
             handlers = new();
 
-        public void OnGameplayStepApplied(IGameplayStep stepExecutionData, Action onComplete)
+        public void OnGameplayStepApplied(IGameplayStep stepExecutionData, ExecutionEngineContext ctx, Action onComplete)
         {
             if (handlers.TryGetValue(stepExecutionData.GetType(), out var handler))
             {
-                handler.onApply(stepExecutionData, onComplete);
+                handler.onApply(stepExecutionData, ctx, onComplete);
             }
             else
             {
@@ -24,11 +25,11 @@ namespace Gameplay.Execution.Dispatcher.Systems
             }
         }
 
-        public void OnGameplayStepUndo(IGameplayStep stepExecutionData, Action onComplete)
+        public void OnGameplayStepUndo(IGameplayStep stepExecutionData, ExecutionEngineContext ctx, Action onComplete)
         {
             if (handlers.TryGetValue(stepExecutionData.GetType(), out var handler))
             {
-                handler.onUndo(stepExecutionData, onComplete);
+                handler.onUndo(stepExecutionData, ctx, onComplete);
             }
             else
             {
@@ -42,14 +43,14 @@ namespace Gameplay.Execution.Dispatcher.Systems
         }
 
         protected void RegisterGameplayStep<T>(
-            Action<T, Action> onApply,
-            Action<T, Action> onUndo) where T : IGameplayStep
+            Action<T, ExecutionEngineContext, Action> onApply,
+            Action<T, ExecutionEngineContext, Action> onUndo) where T : IGameplayStep
         {
             var stepType = typeof(T);
 
             handlers[stepType] = (
-                (step, onComplete) => onApply((T) step, onComplete),
-                (step, onComplete) => onUndo((T) step, onComplete)
+                (step, ctx, onComplete) => onApply((T) step, ctx, onComplete),
+                (step, ctx, onComplete) => onUndo((T) step, ctx, onComplete)
             );
         }
     }

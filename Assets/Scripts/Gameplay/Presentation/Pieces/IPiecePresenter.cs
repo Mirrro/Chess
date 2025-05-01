@@ -6,7 +6,7 @@ namespace Gameplay.Presentation.Pieces
     /// <summary>
     /// Interface for controlling the visual presentation and behavior of a single chess piece.
     /// </summary>
-    public interface IPiecePresenter
+    public interface IPiecePresenter : IDisposable
     {
         public void Move(Vector3 position, Action onCompleted);
         public void SetColor(Color color);
