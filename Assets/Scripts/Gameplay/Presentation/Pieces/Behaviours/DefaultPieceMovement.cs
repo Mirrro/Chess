@@ -9,12 +9,15 @@ namespace Gameplay.Presentation.Pieces.Behaviours
     /// </summary>
     public class DefaultPieceMovement : PieceMovement
     {
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioClip audioClip;
         private Sequence moveSequence;
 
         public override void Move(Vector3 position, Action onCompleted)
         {
             moveSequence?.Kill();
             moveSequence = DOTween.Sequence();
+            audioSource.PlayOneShot(audioClip);
             moveSequence.Append(transform.DOMove(position, 0.5f));
             moveSequence.OnComplete(() => onCompleted?.Invoke());
         }

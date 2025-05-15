@@ -9,11 +9,13 @@ namespace Gameplay.Execution.Moves
     /// </summary>
     public class GameplayMove : IGameplayMove
     {
+        public Vector2Int From { get; }
         public Vector2Int TargetPosition { get; }
         private readonly List<IGameplayStep> steps;
 
-        public GameplayMove(Vector2Int targetPosition, List<IGameplayStep> steps)
+        public GameplayMove(Vector2Int from, Vector2Int targetPosition, List<IGameplayStep> steps)
         {
+            From = from;
             TargetPosition = targetPosition;
             this.steps = steps;
         }

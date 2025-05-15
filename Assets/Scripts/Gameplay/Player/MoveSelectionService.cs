@@ -6,6 +6,7 @@ using Gameplay.Execution;
 using Gameplay.Execution.Models;
 using Gameplay.Execution.Moves;
 using Gameplay.MoveGeneration;
+using Gameplay.MoveGeneration.Generators;
 using Gameplay.Presentation;
 using UnityEngine;
 
@@ -20,6 +21,7 @@ namespace Gameplay.Player
         private readonly GameplayContext gameplayContext;
 
         private readonly ExecutionService executionService;
+        private readonly BurstMoveFinder movesFinder;
 
         private List<IGameplayMove> possibleGameplayMoves = new();
         private PieceGameplayModel selectedPieceGameplay;

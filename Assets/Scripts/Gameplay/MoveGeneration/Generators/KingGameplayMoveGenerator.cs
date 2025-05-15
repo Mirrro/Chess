@@ -44,7 +44,7 @@ namespace Gameplay.MoveGeneration.Generators
 
                 if (!MoveGenerationHelper.IsTileOccupied(gameplayStateModel, possiblePosition))
                 {
-                    moves.Add(new GameplayMove(possiblePosition, new List<IGameplayStep>
+                    moves.Add(new GameplayMove(kingModel.Position, possiblePosition, new List<IGameplayStep>
                     {
                         new MovePieceStep(kingId, possiblePosition)
                     }));
@@ -55,7 +55,7 @@ namespace Gameplay.MoveGeneration.Generators
                         piece.Position == possiblePosition && piece.IsColor != kingModel.IsColor);
                     if (targetPiece != null)
                     {
-                        moves.Add(new GameplayMove(possiblePosition, new List<IGameplayStep>
+                        moves.Add(new GameplayMove(kingModel.Position, possiblePosition, new List<IGameplayStep>
                         {
                             new MovePieceStep(kingId, possiblePosition),
                             new CapturePieceStep(kingId, targetPiece.Id)
@@ -81,7 +81,7 @@ namespace Gameplay.MoveGeneration.Generators
                         {
                             var newKingPosition = new Vector2Int(6, kingModel.Position.y);
                             var newRookPosition = new Vector2Int(5, castlingRookModel.Position.y);
-                            moves.Add(new GameplayMove(newKingPosition, new List<IGameplayStep>
+                            moves.Add(new GameplayMove(kingModel.Position, newKingPosition, new List<IGameplayStep>
                             {
                                 new MovePieceStep(kingId, newKingPosition),
                                 new MovePieceStep(castlingRookModel.Id, newRookPosition)
@@ -91,7 +91,7 @@ namespace Gameplay.MoveGeneration.Generators
                         {
                             var newKingPosition = new Vector2Int(2, kingModel.Position.y);
                             var newRookPosition = new Vector2Int(3, castlingRookModel.Position.y);
-                            moves.Add(new GameplayMove(newKingPosition, new List<IGameplayStep>
+                            moves.Add(new GameplayMove(kingModel.Position, newKingPosition, new List<IGameplayStep>
                             {
                                 new MovePieceStep(kingId, newKingPosition),
                                 new MovePieceStep(castlingRookModel.Id, newRookPosition)

@@ -33,7 +33,7 @@ namespace Gameplay.States
 
         private async UniTask ExecuteMove()
         {
-            var bestMove = await chessAi.FindBestMove(gameplayContext.GameplayStateModel.Clone(), false, 3);
+            var bestMove = await chessAi.FindBestMove(gameplayContext.GameplayStateModel.Clone(), false, 5);
             executionService.ExecuteLive(gameplayContext.GameplayStateModel, bestMove, () => StateCompleted?.Invoke());
         }
     }

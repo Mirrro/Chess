@@ -33,7 +33,7 @@ namespace Gameplay.MoveGeneration.Generators
 
             foreach (var moveablePosition in targetPositions.moveables)
             {
-                moves.Add(new GameplayMove(moveablePosition, new List<IGameplayStep>
+                moves.Add(new GameplayMove(bishopModel.Position, moveablePosition, new List<IGameplayStep>
                 {
                     new MovePieceStep(bishopId, moveablePosition)
                 }));
@@ -41,7 +41,7 @@ namespace Gameplay.MoveGeneration.Generators
 
             foreach (var captureable in targetPositions.captureables)
             {
-                moves.Add(new GameplayMove(captureable.position, new List<IGameplayStep>
+                moves.Add(new GameplayMove(bishopModel.Position, captureable.position, new List<IGameplayStep>
                 {
                     new MovePieceStep(bishopId, captureable.position),
                     new CapturePieceStep(bishopId, captureable.targetId)

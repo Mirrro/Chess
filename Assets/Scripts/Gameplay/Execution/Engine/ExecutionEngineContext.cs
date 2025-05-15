@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Gameplay.Execution.Dispatcher;
-using Gameplay.Execution.Dispatcher.Systems;
 using Gameplay.Execution.Models;
 using Gameplay.Execution.Moves;
 using Gameplay.Execution.Moves.Steps;
@@ -15,17 +15,22 @@ namespace Gameplay.Execution.Engine
     public class ExecutionEngineContext
     {
         public GameplayStateModel GameplayStateModel => gameplayStateModel;
-        private readonly GameplayStateModel gameplayStateModel;
-        private readonly StepObserverDispatcher dispatcher;
+        private GameplayStateModel gameplayStateModel;
+        private StepObserverDispatcher dispatcher;
+        
         private readonly Queue<IGameplayStep> stepQueue = new();
-        private readonly Queue<IGameplayStep> executedSteps = new();
+        private readonly Stack<IGameplayStep> executedSteps = new();
 
-        public ExecutionEngineContext(GameplayStateModel gameplayStateModel, IGameplayMove gameplayMove,
-            StepObserverDispatcher dispatcher)
+        public void Clear()
         {
-            this.gameplayStateModel = gameplayStateModel;
-            this.dispatcher = dispatcher;
+            stepQueue.Clear();
+            executedSteps.Clear();
+        }
 
+        public void Construct(GameplayStateModel gameplayStateModel, IGameplayMove gameplayMove, StepObserverDispatcher stepObserverDispatcher)
+        {
+            dispatcher = stepObserverDispatcher;
+            this.gameplayStateModel = gameplayStateModel;
             foreach (var step in gameplayMove.GetSteps())
             {
                 stepQueue.Enqueue(step);
@@ -60,7 +65,7 @@ namespace Gameplay.Execution.Engine
 
             dispatcher.OnStepAllied(step, this, () =>
             {
-                executedSteps.Enqueue(step);
+                executedSteps.Push(step);
                 DispatchNextStepInternal(onComplete);
             });
         }
@@ -73,13 +78,34 @@ namespace Gameplay.Execution.Engine
                 return;
             }
 
-            var step = executedSteps.Dequeue();
+            var step = executedSteps.Pop();
             step.Undo(gameplayStateModel);
 
             dispatcher.OnStepUndo(step, this, () => { UndoNextStepInternal(onComplete); });
         }
+    }
 
-        public class Factory : PlaceholderFactory<GameplayStateModel, IGameplayMove, StepObserverDispatcher,
-            ExecutionEngineContext> { }
+    public class ExecutionEngineContextPool
+    {
+        private List<ExecutionEngineContext> freeContexts = new();
+
+        public ExecutionEngineContext Get(GameplayStateModel gameplayStateModel, IGameplayMove gameplayMove, StepObserverDispatcher stepObserverDispatcher)
+        {
+            if (freeContexts.Count == 0)
+            {
+                freeContexts.Add(new ExecutionEngineContext());
+            }
+
+            var context = freeContexts.First();
+            context.Construct(gameplayStateModel, gameplayMove, stepObserverDispatcher);
+            freeContexts.Remove(context);
+            return context;
+        }
+
+        public void Return(ExecutionEngineContext executionEngineContext)
+        {
+            executionEngineContext.Clear();
+            freeContexts.Add(executionEngineContext);
+        }
     }
 }

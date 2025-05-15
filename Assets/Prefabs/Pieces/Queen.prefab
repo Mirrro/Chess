@@ -165,6 +165,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dfc81ce9e6044dbba1c8e9ec73c97e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSource: {fileID: 5143607683373173550}
+  audioClip: {fileID: 8300000, guid: 698fb4652a175f743b071bd9bcebb506, type: 3}
 --- !u!114 &7222086634160761507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -322,7 +324,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: f219a0c267eda6447ad6526ec22e72f3, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 83b46481041dc884db8905312bddf4e0, type: 2}
+      objectReference: {fileID: 2100000, guid: 3b5eba03d10a8da4b938ff71ded63bda, type: 2}
     - target: {fileID: 919132149155446097, guid: f219a0c267eda6447ad6526ec22e72f3, type: 3}
       propertyPath: m_Name
       value: Queen

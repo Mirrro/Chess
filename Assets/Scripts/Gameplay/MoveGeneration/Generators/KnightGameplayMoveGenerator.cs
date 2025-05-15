@@ -40,7 +40,7 @@ namespace Gameplay.MoveGeneration.Generators
 
                     if (!MoveGenerationHelper.IsTileOccupied(gameplayStateModel, possiblePosition))
                     {
-                        moves.Add(new GameplayMove(possiblePosition, new List<IGameplayStep>
+                        moves.Add(new GameplayMove(knightModel.Position, possiblePosition, new List<IGameplayStep>
                         {
                             new MovePieceStep(knightId, possiblePosition)
                         }));
@@ -51,7 +51,7 @@ namespace Gameplay.MoveGeneration.Generators
                             piece.Position == possiblePosition && piece.IsColor != knightModel.IsColor);
                         if (targetPiece != null)
                         {
-                            moves.Add(new GameplayMove(possiblePosition, new List<IGameplayStep>
+                            moves.Add(new GameplayMove(knightModel.Position, possiblePosition, new List<IGameplayStep>
                             {
                                 new MovePieceStep(knightId, possiblePosition),
                                 new CapturePieceStep(knightId, targetPiece.Id)

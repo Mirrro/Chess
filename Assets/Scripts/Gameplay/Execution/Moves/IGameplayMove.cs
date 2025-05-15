@@ -9,6 +9,7 @@ namespace Gameplay.Execution.Moves
     /// </summary>
     public interface IGameplayMove
     {
+        public Vector2Int From { get; }
         public Vector2Int TargetPosition { get; }
         public IEnumerable<IGameplayStep> GetSteps();
     }

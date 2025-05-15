@@ -18,7 +18,8 @@ Material:
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
-  disabledShaderPasses: []
+  disabledShaderPasses:
+  - MOTIONVECTORS
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
@@ -37,14 +38,15 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _FractionPower: 7.3
-    - _GradientScale: 25.29
+    - _FractionPower: 4.3
+    - _GradientScale: 1.07
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
-    - _ColorA: {r: 0.6132076, g: 0.48809704, b: 0.41941082, a: 0}
-    - _ColorB: {r: 0.254717, g: 0.061276253, b: 0.061276253, a: 0}
+    - _ColorA: {r: 0.18867922, g: 0.084488764, b: 0.04538981, a: 0}
+    - _ColorB: {r: 0.3584906, g: 0.1962853, b: 0.113296546, a: 1}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!114 &7234065685126105791
 MonoBehaviour:
   m_ObjectHideFlags: 11
@@ -57,4 +59,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 7
+  version: 9

@@ -12,8 +12,7 @@ namespace Gameplay.MoveGeneration.Utility
     public static class MoveGenerationHelper
     {
         public static (List<Vector2Int> moveables, List<(Vector2Int position, int targetId)> captureables)
-            FindLegalPositions(
-                GameplayStateModel gameplayStateModel, int pieceId, List<Vector2Int> directions)
+            FindLegalPositions(GameplayStateModel gameplayStateModel, int pieceId, List<Vector2Int> directions)
         {
             var moveables = new List<Vector2Int>();
             var captureables = new List<(Vector2Int position, int targetId)>();

@@ -7,6 +7,7 @@ using Gameplay.Execution.Dispatcher.Systems;
 using Gameplay.Execution.Engine;
 using Gameplay.Execution.Models;
 using Gameplay.Execution.Moves;
+using Gameplay.MoveGeneration.Generators;
 using Gameplay.Player;
 using Gameplay.Presentation;
 using Gameplay.Presentation.Pieces;
@@ -40,18 +41,20 @@ namespace Gameplay.Bootstrapping
             Container.BindInterfacesAndSelfTo<PlayerTurnState>().AsSingle();
             Container.BindInterfacesAndSelfTo<AITurnState>().AsSingle();
             Container.BindInterfacesAndSelfTo<ChessAi>().AsSingle();
+            Container.BindInterfacesAndSelfTo<BurstMoveFinder>().AsSingle();
 
             Container.BindInterfacesAndSelfTo<MoveSelectionService>().AsSingle();
 
             Container.BindInterfacesAndSelfTo<DebugStepReactionSystem>().AsSingle();
+            Container.BindInterfacesAndSelfTo<AIDebugReactionSystem>().AsSingle();
             Container.BindInterfacesAndSelfTo<GamePresentationStepReactionSystem>().AsSingle();
             Container.BindInterfacesAndSelfTo<PreviewStepRectionSystem>().AsSingle();
             Container.BindInterfacesAndSelfTo<StepObserverDispatcherBuilder>().AsSingle();
             Container.BindInterfacesAndSelfTo<GameplayExecutionEngineBuilder>().AsSingle();
             Container.BindInterfacesAndSelfTo<ExecutionService>().AsSingle();
+            Container.BindInterfacesAndSelfTo<ExecutionEngineContextPool>().AsSingle();
 
             Container.BindFactory<IEnumerable<IGameplayStepReactionSystem>, StepObserverDispatcher, StepObserverDispatcher.Factory>().AsSingle();
-            Container.BindFactory<GameplayStateModel, IGameplayMove, StepObserverDispatcher, ExecutionEngineContext, ExecutionEngineContext.Factory>().AsSingle();
             Container.BindFactory<StepObserverDispatcher, GameplayExecutionEngine, GameplayExecutionEngine.Factory>().AsSingle();
             Container.BindFactory<IPieceView, IPieceVisualModel, PiecePresenter, PiecePresenter.Factory>().AsSingle();
 

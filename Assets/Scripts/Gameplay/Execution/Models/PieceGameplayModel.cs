@@ -7,6 +7,12 @@ namespace Gameplay.Execution.Models
     /// </summary>
     public class PieceGameplayModel : ICloneableModel<PieceGameplayModel>
     {
+        public int Id;
+        public bool IsColor;
+        public Vector2Int Position;
+        public bool HasMoved;
+        public PieceType PieceType;
+
         public PieceGameplayModel(int id, bool isColor, PieceType pieceType, Vector2Int position)
         {
             Id = id;
@@ -23,11 +29,5 @@ namespace Gameplay.Execution.Models
                 HasMoved = HasMoved
             };
         }
-
-        public int Id;
-        public bool IsColor;
-        public Vector2Int Position;
-        public bool HasMoved;
-        public PieceType PieceType;
     }
 }

@@ -8,6 +8,13 @@ namespace Gameplay.Execution.Models
     /// </summary>
     public class GameplayStateModel : ICloneableModel<GameplayStateModel>
     {
+        public Dictionary<int, PieceGameplayModel> PieceMap = new();
+
+        public Vector2Int EnPassantTrapPosition = new(-1, -1);
+        public int EnPassantTurn = -1;
+        public int EnPassantPieceId = -1;
+        public int TurnCount;
+        
         public bool TryGetPieceModelById(int id, out PieceGameplayModel gameplayModel)
         {
             return PieceMap.TryGetValue(id, out gameplayModel);
@@ -32,7 +39,6 @@ namespace Gameplay.Execution.Models
                 EnPassantTrapPosition = EnPassantTrapPosition,
                 TurnCount = TurnCount
             };
-
             foreach (var kvp in PieceMap)
             {
                 clone.PieceMap.Add(kvp.Key, kvp.Value.Clone());
@@ -40,12 +46,5 @@ namespace Gameplay.Execution.Models
 
             return clone;
         }
-
-        public Dictionary<int, PieceGameplayModel> PieceMap = new();
-
-        public Vector2Int EnPassantTrapPosition = new(-1, -1);
-        public int EnPassantTurn = -1;
-        public int EnPassantPieceId = -1;
-        public int TurnCount;
     }
 }

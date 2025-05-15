@@ -1,4 +1,8 @@
+using Gameplay.AI;
 using Gameplay.Bootstrapping;
+using Gameplay.MoveGeneration;
+using Gameplay.MoveGeneration.Generators;
+using UnityEngine;
 
 namespace Gameplay.States
 {
@@ -10,15 +14,17 @@ namespace Gameplay.States
         private readonly PlayerTurnState playerTurnState;
         private readonly AITurnState aiTurnState;
         private readonly GameplayContext gameplayContext;
+        private readonly BurstMoveFinder movesFinder;
 
         private IGameplayState activeGameplayState;
 
         public GameplayStateMachine(PlayerTurnState playerTurnState, AITurnState aiTurnState,
-            GameplayContext gameplayContext)
+            GameplayContext gameplayContext, BurstMoveFinder movesFinder)
         {
             this.playerTurnState = playerTurnState;
             this.aiTurnState = aiTurnState;
             this.gameplayContext = gameplayContext;
+            this.movesFinder = movesFinder;
         }
 
         public void StartGame()
@@ -30,11 +36,22 @@ namespace Gameplay.States
 
         private void OnPlayerStateCompleted()
         {
+            if (IsGameOver(false))
+            {
+                Debug.Log("Game Over");
+                return;
+            }
             SwitchTurns(aiTurnState);
         }
 
         private void OnAiStateCompleted()
         {
+            if (IsGameOver(true))
+            {
+                Debug.Log("Game Over");
+                return;
+            }
+            
             SwitchTurns(playerTurnState);
         }
 
@@ -46,6 +63,17 @@ namespace Gameplay.States
             activeGameplayState?.Deactivate();
             activeGameplayState = newGameplayState;
             activeGameplayState.Activate();
+        }
+
+        private bool IsGameOver(bool isColor)
+        {
+            return HasNoLegalMoves(isColor) || BoardEvaluator.IsGameOver(gameplayContext.GameplayStateModel);
+        }
+
+        private bool HasNoLegalMoves(bool isColor)
+        {
+            var moves = movesFinder.RunJob(gameplayContext.GameplayStateModel, isColor, false);
+            return moves.Count == 0;
         }
     }
 }

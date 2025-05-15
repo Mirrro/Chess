@@ -13,16 +13,18 @@ namespace Gameplay.Execution.Builder
         private readonly PreviewStepRectionSystem previewStepReactionSystem;
         private readonly GamePresentationStepReactionSystem gamePresentationStepReactionSystem;
         private readonly DebugStepReactionSystem debugStepReactionSystem;
+        private readonly AIDebugReactionSystem aiDebugReactionSystem;
 
         public StepObserverDispatcherBuilder(StepObserverDispatcher.Factory factory,
             PreviewStepRectionSystem previewStepReactionSystem,
             GamePresentationStepReactionSystem gamePresentationStepReactionSystem,
-            DebugStepReactionSystem debugStepReactionSystem)
+            DebugStepReactionSystem debugStepReactionSystem, AIDebugReactionSystem aiDebugReactionSystem)
         {
             this.factory = factory;
             this.previewStepReactionSystem = previewStepReactionSystem;
             this.gamePresentationStepReactionSystem = gamePresentationStepReactionSystem;
             this.debugStepReactionSystem = debugStepReactionSystem;
+            this.aiDebugReactionSystem = aiDebugReactionSystem;
         }
 
         public StepObserverDispatcher BuildLive()

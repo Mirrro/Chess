@@ -16,12 +16,13 @@ namespace Gameplay.Presentation
         [SerializeField] private GameObject tilePrefab;
         [SerializeField] private Color black;
         [SerializeField] private Color white;
+        [SerializeField] private HighlightView highlightView;
 
         private BoardTileView[,] boardTileViews;
 
         public void HighlightTile(Vector2Int position, Color color)
         {
-            boardTileViews[position.x, position.y].Highlight(color);
+            highlightView.HighlightTile(position);
         }
 
         public void UnhighlightTile(Vector2Int position)
@@ -31,10 +32,7 @@ namespace Gameplay.Presentation
 
         public void UnhighlightAll()
         {
-            foreach (var boardTileView in boardTileViews)
-            {
-                boardTileView.Unhighlight();
-            }
+            highlightView.ClearHighlights();
         }
 
         public void InitializeBoard()

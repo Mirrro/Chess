@@ -1,30 +1,47 @@
 using System;
+using DG.Tweening;
 using Gameplay.Execution.Models;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PromotionMenu : MonoBehaviour
 {
     public event Action<PieceType> PromotionClicked;
+    
+    [SerializeField] private PromotionButton knightButton;
+    [SerializeField] private PromotionButton bishopButton;
+    [SerializeField] private PromotionButton rookButton;
+    [SerializeField] private PromotionButton queenButton;
 
-    [SerializeField] private Button knightButton;
-    [SerializeField] private Button bishopButton;
-    [SerializeField] private Button rookButton;
-    [SerializeField] private Button queenButton;
+    private Action knightHandler;
+    private Action bishopHandler;
+    private Action rookHandler;
+    private Action queenHandler;
+    
+    private Sequence appearSequence;
 
     private void OnEnable()
     {
-        knightButton.onClick.AddListener(() => PromotionClicked?.Invoke(PieceType.Knight));
-        bishopButton.onClick.AddListener(() => PromotionClicked?.Invoke(PieceType.Bishop));
-        rookButton.onClick.AddListener(() => PromotionClicked?.Invoke(PieceType.Rook));
-        queenButton.onClick.AddListener(() => PromotionClicked?.Invoke(PieceType.Queen));
+        knightHandler = () => OnPromotionClicked(PieceType.Knight);
+        bishopHandler = () => OnPromotionClicked(PieceType.Bishop);
+        rookHandler = () => OnPromotionClicked(PieceType.Rook);
+        queenHandler = () => OnPromotionClicked(PieceType.Queen);
+
+        knightButton.Clicked += knightHandler;
+        bishopButton.Clicked += bishopHandler;
+        rookButton.Clicked += rookHandler;
+        queenButton.Clicked += queenHandler;
     }
 
     private void OnDisable()
     {
-        knightButton.onClick.RemoveAllListeners();
-        bishopButton.onClick.RemoveAllListeners();
-        rookButton.onClick.RemoveAllListeners();
-        queenButton.onClick.RemoveAllListeners();
+        knightButton.Clicked -= knightHandler;
+        bishopButton.Clicked -= bishopHandler;
+        rookButton.Clicked -= rookHandler;
+        queenButton.Clicked -= queenHandler;
+    }
+
+    private void OnPromotionClicked(PieceType pieceType)
+    {
+        PromotionClicked?.Invoke(pieceType);
     }
 }

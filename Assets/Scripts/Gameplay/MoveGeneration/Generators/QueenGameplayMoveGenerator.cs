@@ -37,7 +37,7 @@ namespace Gameplay.MoveGeneration.Generators
 
             foreach (var moveablePosition in targetPositions.moveables)
             {
-                moves.Add(new GameplayMove(moveablePosition, new List<IGameplayStep>
+                moves.Add(new GameplayMove(queenModel.Position, moveablePosition, new List<IGameplayStep>
                 {
                     new MovePieceStep(queenId, moveablePosition)
                 }));
@@ -45,7 +45,7 @@ namespace Gameplay.MoveGeneration.Generators
 
             foreach (var captureable in targetPositions.captureables)
             {
-                moves.Add(new GameplayMove(captureable.position, new List<IGameplayStep>
+                moves.Add(new GameplayMove(queenModel.Position, captureable.position, new List<IGameplayStep>
                 {
                     new MovePieceStep(queenId, captureable.position),
                     new CapturePieceStep(queenId, captureable.targetId)
