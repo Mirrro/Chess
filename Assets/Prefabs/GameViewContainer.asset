@@ -19,3 +19,4 @@ MonoBehaviour:
   queenViewPrefab: {fileID: 5557681138352787691, guid: 8541a8400ffdbe54e83a6549cf4366cb, type: 3}
   kingViewPrefab: {fileID: 693583781930888874, guid: cc9a17c30b429854bab4dc75c16a1537, type: 3}
   tileViewPrefab: {fileID: 8904241797829666783, guid: 9e7f38bb80d30f743add9cd4380d3b6e, type: 3}
+  messageBoxPrefab: {fileID: 2997388582712198556, guid: 5f09f10547f8b87489632655d5f3739e, type: 3}

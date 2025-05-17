@@ -1,4 +1,5 @@
 using Gameplay.Presentation.Pieces;
+using Gameplay.Presentation.UI;
 using UnityEngine;
 
 namespace Gameplay.Presentation
@@ -16,6 +17,9 @@ namespace Gameplay.Presentation
         [SerializeField] private PieceView queenViewPrefab;
         [SerializeField] private PieceView kingViewPrefab;
         [SerializeField] private BoardTileView tileViewPrefab;
+        [SerializeField] private MessageBoxView messageBoxPrefab;
+        
+        public MessageBoxView MessageBoxPrefab => messageBoxPrefab;
 
         public PieceView GetPawnViewPrefab()
         {

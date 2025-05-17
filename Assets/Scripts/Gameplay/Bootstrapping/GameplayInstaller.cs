@@ -5,12 +5,11 @@ using Gameplay.Execution.Builder;
 using Gameplay.Execution.Dispatcher;
 using Gameplay.Execution.Dispatcher.Systems;
 using Gameplay.Execution.Engine;
-using Gameplay.Execution.Models;
-using Gameplay.Execution.Moves;
 using Gameplay.MoveGeneration.Generators;
 using Gameplay.Player;
 using Gameplay.Presentation;
 using Gameplay.Presentation.Pieces;
+using Gameplay.Presentation.UI;
 using Gameplay.States;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -28,13 +27,18 @@ namespace Gameplay.Bootstrapping
 
         [SerializeField] private BoardView boardView;
         [SerializeField] private PromotionMenu promotionMenu;
+        [SerializeField] private OpponentUIView opponentUI;
+        [SerializeField] private OpponentConfig opponentConfig;
 
         public override void InstallBindings()
         {
             Container.BindInstance(gameViewContainer);
             Container.BindInstance(boardView);
             Container.BindInstance(promotionMenu);
+            Container.BindInstance(opponentConfig);
 
+            Container.BindInterfacesAndSelfTo<OpponentUIPresenter>().AsSingle().WithArguments(opponentUI, new OpponentUIModel());
+            Container.BindInterfacesAndSelfTo<MessageBoxPresenterPool>().AsSingle();
             Container.BindInterfacesAndSelfTo<GameplayContext>().AsSingle();
             Container.BindInterfacesAndSelfTo<GamePresentation>().AsSingle();
             Container.BindInterfacesAndSelfTo<GameplayStateMachine>().AsSingle();
@@ -57,6 +61,7 @@ namespace Gameplay.Bootstrapping
             Container.BindFactory<IEnumerable<IGameplayStepReactionSystem>, StepObserverDispatcher, StepObserverDispatcher.Factory>().AsSingle();
             Container.BindFactory<StepObserverDispatcher, GameplayExecutionEngine, GameplayExecutionEngine.Factory>().AsSingle();
             Container.BindFactory<IPieceView, IPieceVisualModel, PiecePresenter, PiecePresenter.Factory>().AsSingle();
+            Container.BindFactory<MessageBoxView, MessageBoxModel, MessageBoxPresenter, MessageBoxPresenter.Factory>().AsSingle();
 
             Container.BindInterfacesAndSelfTo<Bootstrapper>().AsSingle();
         }

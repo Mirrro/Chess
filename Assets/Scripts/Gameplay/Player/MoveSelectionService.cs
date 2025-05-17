@@ -25,7 +25,7 @@ namespace Gameplay.Player
 
         private List<IGameplayMove> possibleGameplayMoves = new();
         private PieceGameplayModel selectedPieceGameplay;
-        private Action onComplete;
+        private Action<IGameplayMove> onMoveSelected;
 
         public MoveSelectionService(
             GamePresentation gamePresentation,
@@ -37,9 +37,9 @@ namespace Gameplay.Player
             this.executionService = executionService;
         }
 
-        public void PlayerExecuteMove(Action onComplete)
+        public void PlayerSelectMove(Action<IGameplayMove> onMoveSelected)
         {
-            this.onComplete = onComplete;
+            this.onMoveSelected = onMoveSelected;
             Deactivate();
             gamePresentation.TileSelected += OnTileSelected;
             gamePresentation.TileHovered += OnTileHovered;
@@ -48,7 +48,6 @@ namespace Gameplay.Player
 
         private void OnTileSelected(Vector2Int tilePosition)
         {
-            // Phase 1: Selecting a pieceGameplay
             if (selectedPieceGameplay == null)
             {
                 selectedPieceGameplay = gameplayContext.GameplayStateModel.PieceMap.Values
@@ -70,24 +69,17 @@ namespace Gameplay.Player
                 return;
             }
 
-            // Phase 2: Selecting a move
             var selectedMove = possibleGameplayMoves.FirstOrDefault(m => m.TargetPosition == tilePosition);
             if (selectedMove != null)
             {
                 gamePresentation.UnhighlightAllTiles();
                 Deactivate();
-                executionService.ExecuteLive(gameplayContext.GameplayStateModel, selectedMove, OnMoveComplete);
+                onMoveSelected?.Invoke(selectedMove);
             }
             else
             {
-                // Deselect if clicked elsewhere
                 ClearSelection();
             }
-        }
-
-        private void OnMoveComplete()
-        {
-            onComplete?.Invoke();
         }
 
         private void OnTileHovered(Vector2Int tilePosition)
@@ -125,20 +117,6 @@ namespace Gameplay.Player
             possibleGameplayMoves.Clear();
             gamePresentation.UnhighlightAllTiles();
             executionService.UndoPreview(null);
-        }
-    }
-
-    public class PromotionSelectionService
-    {
-        private readonly GamePresentation gamePresentation;
-        public PromotionSelectionService(GamePresentation gamePresentation)
-        {
-            this.gamePresentation = gamePresentation;
-        }
-
-        public void SelectPromotion(Action<PieceType> onComplete)
-        {
-            gamePresentation.SelectPromotion(onComplete);
         }
     }
 }

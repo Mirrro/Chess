@@ -1,0 +1,104 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 259dfde345e7416bb24c73a0cce64020, type: 3}
+  m_Name: OpponentConfig_02
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: 4f7bc0affc1d68f49955f41550181fac, type: 3}
+  name: Alexei Navarro
+  description: "Alexei is a 27-year-old IT consultant with a decade of casual chess
+    experience under his belt. He plays sharp, tactical lines but sometimes gets
+    lost in complex positions. Known for a calm demeanor and wearing the same navy
+    blazer to every tournament, he\u2019s earned the nickname \u201CThe Analyst\u201D
+    for his methodical openings and obsession with studying grandmaster games. He\u2019s
+    gunning for that expert rating, just one disciplined training arc away."
+  title: Local Champion
+  moveQuotes:
+  - "Calculated. You wouldn\u2019t get it."
+  - "That\u2019s not just a move. It\u2019s a message."
+  - "I\u2019ve run simulations. You lose in 23 turns."
+  - Try to play slower. Watching you think is fun.
+  - Another step toward your inevitable collapse.
+  - "I\u2019ve seen this line before - it ends badly for you."
+  - "Efficient. Elegant. I\u2019m practically teaching."
+  - One step closer to positional domination.
+  - "I don\u2019t make moves. I build legacies."
+  - "That\u2019s called pressure. Hope you can handle it."
+  - "You wouldn\u2019t understand the brilliance behind that."
+  - One quiet move. Infinite consequences.
+  - "There\u2019s logic here. Shame you can\u2019t see it."
+  - Even my quiet moves are loud.
+  - "Don\u2019t worry - this one won\u2019t hurt. Yet."
+  - I could play blindfolded and still lead.
+  - Every move brings me closer to checkmate.
+  - "You think it\u2019s simple. That\u2019s the trap."
+  - An ordinary move. With extraordinary consequences.
+  - "I hope you\u2019re keeping up. The pace only gets faster."
+  - "That\u2019s how you play real chess - not whatever you\u2019re doing."
+  - "Just laying the groundwork. You\u2019ll regret it later."
+  - "I\u2019m not attacking. Yet."
+  - "If you were better, you\u2019d be nervous."
+  - "That\u2019s not instinct. That\u2019s decades of theory."
+  - "The board\u2019s shifting. And you\u2019re behind."
+  - "It\u2019s all part of the long game. Something you clearly don\u2019t play."
+  - "It looks harmless, I know. That\u2019s the best part."
+  captureAgainstQuotes:
+  - "A minor oversight. Won\u2019t happen again."
+  - Huh. You actually saw that? Impressive.
+  - "Fine. One mistake. Don\u2019t get used to it."
+  - Enjoy the freebie - it's the last one.
+  - I am trading this one later.
+  thinkingQuote:
+  - "Let\u2019s see how deep this rabbit hole goes."
+  - I could win with my second-best line here.
+  - "So many options\u2026 none of them good for you."
+  - Time to calculate - not that I need to.
+  - Do I go for style or efficiency?
+  - "Let\u2019s untangle this mess you\u2019ve made."
+  - Hmm. Should I go easy or educational?
+  - So many flaws to exploit. Where to start?
+  - "This shouldn\u2019t take long."
+  - "Let\u2019s pretend this is a challenge."
+  - "You won\u2019t like what\u2019s coming."
+  - The silence before the storm. Listen closely.
+  captureInFavourQuote:
+  - Clean. Efficient. Brutal.
+  - "Didn\u2019t even have to try for that one."
+  - Tactical superiority in action.
+  - You left it hanging. I punished it.
+  - Punished. Just like I planned.
+  - "You can\u2019t afford to keep giving things away."
+  - "If you\u2019re this generous, I\u2019ll finish early."
+  - That piece deserved better.
+  - "It\u2019s not even personal. Just efficient."
+  - Weakness exposed. Exploited.
+  - "If it hurts, you\u2019re learning."
+  - You're bleeding pieces. Intentional?
+  - This is what happens when you skip the basics.
+  - You can resign any time, you know.
+  - Another gap in your so-called plan.
+  - Falling apart already? I expected more.
+  - "Keep handing me pieces - I\u2019ll keep accepting."
+  - Losses like that are how games end.
+  - "You should\u2019ve seen that coming. I did."
+  - "I didn\u2019t even need to think for that."
+  - "It\u2019s just basic control. You might learn it someday."
+  promotionInFavourQuote:
+  - Promotion achieved. Predictable outcome.
+  - "Now I have all the tools. You have\u2026 hope."
+  - Evolved midgame pressure. Adapt or collapse.
+  - Every piece matters - especially this one.
+  promotionAgainstQuote:
+  - Desperation disguised as progress.
+  - "Cute upgrade. Won\u2019t change much."
+  - Now try using it correctly.
+  - "You\u2019re catching up - barely."
+  searchDepth: 2

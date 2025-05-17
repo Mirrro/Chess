@@ -18,8 +18,6 @@ namespace Gameplay.MoveGeneration.Generators
         {
             var moveList = new NativeList<MoveData>(512, Allocator.TempJob);
             var board = ToBoardData(gameplayStateModel, Allocator.TempJob);
-            // var sw = Stopwatch.StartNew();
-            
             var job = new GenerateAllMovesJob
             {
                 Board = board,
@@ -31,9 +29,6 @@ namespace Gameplay.MoveGeneration.Generators
             handle.Complete();
 
             var results = ConvertToGameplayMoves(moveList);
-            //
-            // sw.Stop();
-            // Debug.Log($"Move generation took {sw.Elapsed.TotalMilliseconds:F8} ms");
             moveList.Dispose();
             board.Pieces.Dispose();
             return results;

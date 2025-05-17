@@ -38,12 +38,12 @@ namespace Gameplay.AI
         {
             return type switch
             {
-                PieceType.Pawn => 1000,
-                PieceType.Rook => 50000,
-                PieceType.Knight => 30000,
-                PieceType.Bishop => 30000,
-                PieceType.Queen => 90000,
-                PieceType.King => 1000000,
+                PieceType.Pawn => 10,
+                PieceType.Rook => 50,
+                PieceType.Knight => 30,
+                PieceType.Bishop => 30,
+                PieceType.Queen => 90,
+                PieceType.King => 1000,
                 _ => throw new ArgumentOutOfRangeException()
             };
         }

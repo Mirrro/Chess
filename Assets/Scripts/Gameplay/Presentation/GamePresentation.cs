@@ -42,7 +42,7 @@ namespace Gameplay.Presentation
 
             foreach (var pieceModel in gameplayStateModel.PieceMap.Values)
             {
-                piecesPresenterTable.Add(pieceModel.Id, CreatePieceView(pieceModel));
+                piecesPresenterTable.Add(pieceModel.Id, CreatePiecePresentation(pieceModel));
             }
             
             promotionMenu.gameObject.SetActive(false);
@@ -66,7 +66,7 @@ namespace Gameplay.Presentation
             {
                 piecePresenter.Dispose();
                 piecesPresenterTable.Remove(pieceGameplayModel.Id);
-                piecesPresenterTable.Add(pieceGameplayModel.Id, CreatePieceView(pieceGameplayModel));
+                piecesPresenterTable.Add(pieceGameplayModel.Id, CreatePiecePresentation(pieceGameplayModel));
             }
         }
 
@@ -105,7 +105,7 @@ namespace Gameplay.Presentation
             TileSelected?.Invoke(new Vector2Int(arg1, arg2));
         }
 
-        private IPiecePresenter CreatePieceView(PieceGameplayModel pieceGameplayModel)
+        private IPiecePresenter CreatePiecePresentation(PieceGameplayModel pieceGameplayModel)
         {
             var rotation = pieceGameplayModel.IsColor
                 ? Quaternion.LookRotation(Vector3.forward)
