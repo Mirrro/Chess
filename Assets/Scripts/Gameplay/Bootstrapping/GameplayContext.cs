@@ -1,4 +1,5 @@
 using Gameplay.Execution.Models;
+using Gameplay.Presentation;
 
 namespace Gameplay.Bootstrapping
 {
@@ -7,6 +8,7 @@ namespace Gameplay.Bootstrapping
     /// </summary>
     public class GameplayContext
     {
+        public OpponentConfig OpponentConfig { get; set; }
         public GameplayStateModel GameplayStateModel { get; private set; }
 
         public void SetGameplayState(GameplayStateModel newModel)

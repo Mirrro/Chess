@@ -5,9 +5,7 @@ using Gameplay.AI;
 using Gameplay.Bootstrapping;
 using Gameplay.Execution;
 using Gameplay.Execution.Moves.Steps;
-using Gameplay.Presentation;
 using Gameplay.Presentation.UI;
-using NUnit.Framework;
 
 namespace Gameplay.States
 {
@@ -22,15 +20,13 @@ namespace Gameplay.States
         private readonly GameplayContext gameplayContext;
         private readonly ExecutionService executionService;
         private readonly OpponentUIPresenter opponentUIPresenter;
-        private readonly OpponentConfig opponentConfig;
 
-        public AITurnState(ChessAi chessAi, GameplayContext gameplayContext, ExecutionService executionService, OpponentUIPresenter opponentUIPresenter, OpponentConfig opponentConfig)
+        public AITurnState(ChessAi chessAi, GameplayContext gameplayContext, ExecutionService executionService, OpponentUIPresenter opponentUIPresenter)
         {
             this.chessAi = chessAi;
             this.gameplayContext = gameplayContext;
             this.executionService = executionService;
             this.opponentUIPresenter = opponentUIPresenter;
-            this.opponentConfig = opponentConfig;
         }
 
         public void Activate()
@@ -42,20 +38,19 @@ namespace Gameplay.States
 
         private async UniTask ExecuteMove()
         {
-            opponentUIPresenter.DisplayMessage(opponentConfig.GetThinkingQuote());
-            var bestMove = await chessAi.FindBestMove(gameplayContext.GameplayStateModel.Clone(), false, opponentConfig.SearchDepth);
+            var bestMove = await chessAi.FindBestMove(gameplayContext.GameplayStateModel.Clone(), false, gameplayContext.OpponentConfig.SearchDepth);
             
             if (bestMove.GetSteps().Any(step => step is CapturePieceStep))
             {
-                opponentUIPresenter.DisplayMessage(opponentConfig.GetCaptureInFavourQuote());
+                opponentUIPresenter.DisplayMessage(gameplayContext.OpponentConfig.GetCaptureInFavourQuote());
             }
             else if (bestMove.GetSteps().Any(step => step is PromotePieceStep))
             {
-                opponentUIPresenter.DisplayMessage(opponentConfig.GetPromotionInFavourQuote());
+                opponentUIPresenter.DisplayMessage(gameplayContext.OpponentConfig.GetPromotionInFavourQuote());
             }
             else
             {
-                opponentUIPresenter.DisplayMessage(opponentConfig.GetMoveQuote());
+                opponentUIPresenter.DisplayMessage(gameplayContext.OpponentConfig.GetMoveQuote());
             }
             
             executionService.ExecuteLive(gameplayContext.GameplayStateModel, bestMove, () => StateCompleted?.Invoke());

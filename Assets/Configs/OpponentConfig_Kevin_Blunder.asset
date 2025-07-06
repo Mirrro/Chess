@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 259dfde345e7416bb24c73a0cce64020, type: 3}
+  m_Name: OpponentConfig_Kevin_Blunder
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: a078c075fc4c1c84c8b1d80ba1d63c80, type: 3}
+  colorA: {r: 0.46274513, g: 0.30588236, b: 0.08235294, a: 1}
+  colorB: {r: 0.50980395, g: 0.18039216, b: 0.019607844, a: 1}
+  name: Kevin Blunder
+  description: 'Kevin is a 19-year-old college student who discovered chess last
+    semester when he accidentally joined the campus chess club thinking it was a
+    checkers meetup. He still struggles to remember how knights move but has an infectious
+    enthusiasm and a never-say-die attitude. His games are chaotic, impulsive, and
+    often hilarious - and once in a while, brilliance emerges by sheer accident.
+    His motto: "What''s castling again?"'
+  title: Chess Club Member
+  moveQuotes:
+  - Boom. Probably a good move.
+  - Nailed it. I think?
+  - "That\u2019s gotta be at least a little threatening."
+  - I saw that move in a meme once.
+  - "I don\u2019t know what I\u2019m doing, but I\u2019m doing it confidently."
+  - "You feel that? That\u2019s momentum."
+  - Yup. Just made some kind of move.
+  - Is this what strategy feels like?
+  - This move was 30% instinct, 70% panic.
+  - Okay okay, not bad for me.
+  - Check out this premium positioning.
+  - "That\u2019s called a power move\u2026 probably."
+  - "Yeah! Take that\u2026 space on the board!"
+  - "You\u2019re in trouble now. Maybe."
+  - "I\u2019ve never moved that one before!"
+  - Watch out - this is where I accidentally get good.
+  - "That\u2019s right, I planned that. Totally."
+  - All part of the grand... something.
+  - "I\u2019m in my tactical era."
+  - "They told me I couldn\u2019t play chess. Joke\u2019s on them."
+  - This is the part where it gets intense.
+  - "I\u2019ve entered the \u2018just vibe\u2019 phase."
+  - 'I call this: The Blunder Gambit.'
+  - "Let\u2019s pretend I know what I\u2019m doing."
+  - Every genius starts somewhere.
+  - Was that good? Felt good.
+  - That move just raised my Elo spiritually.
+  captureAgainstQuotes:
+  - Whoa! Rude.
+  - Hey! I liked that one!
+  - Nooo! That was my lucky piece!
+  - Plot twist! I lose a piece.
+  - I definitely meant for that to happen.
+  - "You\u2019re not supposed to see that stuff."
+  - Ugh. That felt personal.
+  - That was part of my... reverse strategy.
+  - "Guess I won\u2019t be needing that anymore."
+  - Are you reading my mind or something?
+  - "Let\u2019s call that a tactical donation."
+  - Was that legal? Emotionally, I mean.
+  thinkingQuote:
+  - "Let\u2019s see how deep this rabbit hole goes."
+  - I could win with my second-best line here.
+  - "So many options\u2026 none of them good for you."
+  - Time to calculate - not that I need to.
+  - Do I go for style or efficiency?
+  - "Let\u2019s untangle this mess you\u2019ve made."
+  - Hmm. Should I go easy or educational?
+  - So many flaws to exploit. Where to start?
+  - "This shouldn\u2019t take long."
+  - "Let\u2019s pretend this is a challenge."
+  - "You won\u2019t like what\u2019s coming."
+  - The silence before the storm. Listen closely.
+  captureInFavourQuote:
+  - Yooo I got one!!
+  - Boom! Gotcha!
+  - "I don\u2019t know how I did that but I\u2019m hyped."
+  - "Tactical genius? Don\u2019t mind if I do."
+  - Snatched! With style.
+  - "Okay okay, I\u2019m getting the hang of this."
+  - Oops! Was that important?
+  - Aha! I have struck!
+  - "Are you even trying? Wait - don\u2019t answer that."
+  promotionInFavourQuote:
+  - LEVEL UP, BABY!
+  - I knew this little guy had potential.
+  - "Oh we\u2019re fancy now."
+  - I think I broke the game. In a good way.
+  - From zero to hero. Just like me.
+  - That pawn just made it out the hood.
+  - Bow down to my upgraded chaos.
+  promotionAgainstQuote:
+  - Wait - wait - hold on, you can DO that?
+  - Oh cool, just casually summoning a boss fight.
+  - "That\u2019s fine. It\u2019s fine. I\u2019m fine."
+  - Cool cool cool. Just casually ruining my whole strategy.
+  - "That\u2019s not terrifying at all."
+  - Can we agree to just not use that piece?
+  searchDepth: 1

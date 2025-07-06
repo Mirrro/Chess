@@ -1,25 +1,31 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Gameplay.Presentation
 {
-    [CreateAssetMenu(fileName = "OpponentConfig", menuName = "Game/OpponentConfig")]
+    [Serializable, CreateAssetMenu(fileName = "OpponentConfig", menuName = "Game/OpponentConfig")]
     public class OpponentConfig : ScriptableObject
     {
         [SerializeField] private Sprite sprite;
+        [SerializeField] private Color colorA = Color.gray;
+        [SerializeField] private Color colorB = Color.white;
         
         [SerializeField] private string name;
         [SerializeField] private string description;
         [SerializeField] private string title;
         
-        [SerializeField] private List<string> moveQuotes = new List<string>(); 
-        [SerializeField] private List<string> captureAgainstQuotes = new List<string>(); 
-        [SerializeField] private List<string> thinkingQuote = new List<string>(); 
+        [SerializeField] private List<string> moveQuotes = new List<string>();
+        [SerializeField] private List<string> captureAgainstQuotes = new List<string>();
+        [SerializeField] private List<string> thinkingQuote = new List<string>();
         [SerializeField] private List<string> captureInFavourQuote = new List<string>();
         [SerializeField] private List<string> promotionInFavourQuote = new List<string>();
         [SerializeField] private List<string> promotionAgainstQuote = new List<string>();
         
         [SerializeField] private int searchDepth;
+        
+        public Color ColorA => colorA;
+        public Color ColorB => colorB;
         
         public Sprite Sprite => sprite;
         public string Name => name;

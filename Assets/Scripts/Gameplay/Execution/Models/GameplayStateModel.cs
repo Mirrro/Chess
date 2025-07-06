@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ namespace Gameplay.Execution.Models
     /// <summary>
     /// Represents the entire current state of the game, including piece positions and special rules like en passant.
     /// </summary>
+    [Serializable]
     public class GameplayStateModel : ICloneableModel<GameplayStateModel>
     {
         public Dictionary<int, PieceGameplayModel> PieceMap = new();
@@ -14,7 +16,7 @@ namespace Gameplay.Execution.Models
         public int EnPassantTurn = -1;
         public int EnPassantPieceId = -1;
         public int TurnCount;
-        
+
         public bool TryGetPieceModelById(int id, out PieceGameplayModel gameplayModel)
         {
             return PieceMap.TryGetValue(id, out gameplayModel);

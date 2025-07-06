@@ -1,5 +1,6 @@
 using Gameplay.Execution.Models;
 using Gameplay.Presentation;
+using Gameplay.Presentation.UI;
 using Gameplay.States;
 using Zenject;
 
@@ -13,18 +14,20 @@ namespace Gameplay.Bootstrapping
         private readonly GameplayContext gameplayContext;
         private readonly GamePresentation gamePresentation;
         private readonly GameplayStateMachine gameplayStateMachine;
+        private readonly OpponentUIPresenter opponentUIPresenter;
 
         public Bootstrapper(GameplayContext gameplayContext, GamePresentation gamePresentation,
-            GameplayStateMachine gameplayStateMachine)
+            GameplayStateMachine gameplayStateMachine, OpponentUIPresenter opponentUIPresenter)
         {
             this.gameplayContext = gameplayContext;
             this.gamePresentation = gamePresentation;
             this.gameplayStateMachine = gameplayStateMachine;
+            this.opponentUIPresenter = opponentUIPresenter;
         }
 
         public void Initialize()
         {
-            gameplayContext.SetGameplayState(GameplayStateModelCreationService.CreateNewGame());
+            opponentUIPresenter.SetOpponentPicture(gameplayContext.OpponentConfig.Sprite);
             gamePresentation.Initialize(gameplayContext.GameplayStateModel);
             gameplayStateMachine.StartGame();
         }

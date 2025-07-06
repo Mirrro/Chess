@@ -22,15 +22,13 @@ namespace Gameplay.States
         private readonly ExecutionService executionService;
         private readonly GameplayContext gameplayContext;
         private readonly OpponentUIPresenter opponentUIPresenter;
-        private readonly OpponentConfig opponentConfig;
 
-        public PlayerTurnState(MoveSelectionService moveSelectionService, ExecutionService executionService, GameplayContext gameplayContext, OpponentUIPresenter opponentUIPresenter, OpponentConfig opponentConfig)
+        public PlayerTurnState(MoveSelectionService moveSelectionService, ExecutionService executionService, GameplayContext gameplayContext, OpponentUIPresenter opponentUIPresenter)
         {
             this.moveSelectionService = moveSelectionService;
             this.executionService = executionService;
             this.gameplayContext = gameplayContext;
             this.opponentUIPresenter = opponentUIPresenter;
-            this.opponentConfig = opponentConfig;
         }
 
         public void Activate()
@@ -44,11 +42,11 @@ namespace Gameplay.States
             executionService.ExecuteLive(gameplayContext.GameplayStateModel, selectedMove, OnMoveComplete);
             if (selectedMove.GetSteps().Any(step => step is CapturePieceStep))
             {
-                opponentUIPresenter.DisplayMessage(opponentConfig.GetCaptureAgainstQuote());
+                opponentUIPresenter.DisplayMessage(gameplayContext.OpponentConfig.GetCaptureAgainstQuote());
             }
             else if (selectedMove.GetSteps().Any(step => step is PlayerPromotionStep))
             {
-                opponentUIPresenter.DisplayMessage(opponentConfig.GetPromotionAgainstQuote());
+                opponentUIPresenter.DisplayMessage(gameplayContext.OpponentConfig.GetPromotionAgainstQuote());
             }
         }
 

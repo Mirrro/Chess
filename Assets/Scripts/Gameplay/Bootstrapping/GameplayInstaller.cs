@@ -28,18 +28,17 @@ namespace Gameplay.Bootstrapping
         [SerializeField] private BoardView boardView;
         [SerializeField] private PromotionMenu promotionMenu;
         [SerializeField] private OpponentUIView opponentUI;
-        [SerializeField] private OpponentConfig opponentConfig;
+        [SerializeField] private EndScreenView endScreenView;
 
         public override void InstallBindings()
         {
             Container.BindInstance(gameViewContainer);
             Container.BindInstance(boardView);
             Container.BindInstance(promotionMenu);
-            Container.BindInstance(opponentConfig);
 
             Container.BindInterfacesAndSelfTo<OpponentUIPresenter>().AsSingle().WithArguments(opponentUI, new OpponentUIModel());
+            Container.BindInterfacesAndSelfTo<EndScreenPresenter>().AsSingle().WithArguments(endScreenView);
             Container.BindInterfacesAndSelfTo<MessageBoxPresenterPool>().AsSingle();
-            Container.BindInterfacesAndSelfTo<GameplayContext>().AsSingle();
             Container.BindInterfacesAndSelfTo<GamePresentation>().AsSingle();
             Container.BindInterfacesAndSelfTo<GameplayStateMachine>().AsSingle();
             Container.BindInterfacesAndSelfTo<PlayerTurnState>().AsSingle();

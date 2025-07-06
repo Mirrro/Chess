@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 259dfde345e7416bb24c73a0cce64020, type: 3}
+  m_Name: OpponentConfig_Magnus_Veldt
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: e09f7a8f054379f4685bce177d001ab4, type: 3}
+  colorA: {r: 0.7725491, g: 0.6039216, b: 0.26666668, a: 1}
+  colorB: {r: 0.16470589, g: 0.10196079, b: 0.019607844, a: 1}
+  name: Magnus Veldt
+  description: A mysterious legend in the chess world, Magnus Veldt is rumored to
+    have trained in silence for ten years in a mountain monastery where the only
+    board was made of stone. Now in his sixties, Magnus has seen every gambit, counter-gambit,
+    and psychological ploy imaginable. He rarely speaks, letting his flawless positional
+    play and ice-cold endgames do the talking. To beat him, you must become the board.
+  title: Grandmaster
+  moveQuotes:
+  - ...
+  - ...
+  - ...
+  - ...
+  - Let's see...
+  captureAgainstQuotes:
+  - Hmm...
+  - ...
+  - ...
+  thinkingQuote:
+  - ...
+  captureInFavourQuote:
+  - Takes.
+  - Mhm...
+  promotionInFavourQuote:
+  - ...
+  promotionAgainstQuote:
+  - ...
+  searchDepth: 5
